@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Forum (exam Symfony HB){% endblock %}
+
+{% block body %}
+<header>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 text-center mt-2">
+                <h1> Hello c'est la page d'accueil</h1>
+            </div>
+            <div class="col-12 d-flex justify-content-center mt-2 mb-3">
+                <div class="col-12 d-flex justify-content-center mt-2 mb-3">
+                <button class="btn btn-success rounded-pill mt-3 me-3" type="submit" href="{{ path('app_register') }}">
+        S'enregistrer
+    </button>
+    <button class="btn btn-success rounded-pill mt-3" type="submit" href="{{ path('app_login') }}">
+        Se connecter
+    </button>
+            </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    
+</main>
+
+{% endblock %}

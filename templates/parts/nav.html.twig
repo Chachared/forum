@@ -1,0 +1,29 @@
+<ul class="nav nav-pills">
+                    <li class="nav-item">
+                        <a class="btn btn-primary rounded-pill me-2"  href="{{ path('app_home') }}">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-primary rounded-pill me-2" href="{{ path('app_article_index') }}">Gérer mes articles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-primary rounded-pill me-2" href="{{ path('app_comment_index') }}">Gérer les commentaires</a>
+                    </li>
+
+                    {% if app.user.hasRole('ROLE_ADMIN') %} 
+                        <li class="nav-item ">
+                        <a class="btn btn-primary rounded-pill me-2" href="{{ path('app_category_index') }}">Gérer les catégories</a>
+                    </li>
+                    {% endif %}
+                    
+                    
+                    {% if app.user %}
+                    <li class="btn btn-light rounded-pill me-2">
+                        Bonjour, <strong>{{ app.user.firstname }} {{ app.user.lastname }}</strong>! <a href="{{ path('app_logout') }}">déconnexion</a>
+                    </li>
+                    {% else %}
+                        <li class="nav-item">
+                        <a class="btn btn-primary rounded-pill me-2" href="{{ path('app_login') }}">Connexion</a>
+                    </li>
+                    {% endif %}
+                    
+                </ul>

@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Article{% endblock %}
+
+{% block body %}
+    <header>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 text-center mt-2">
+                <h1> {{article.title}}</h1>
+            </div>
+            <div class="col-12 d-flex justify-content-center mt-2 mb-3">
+                {% include 'parts/nav.html.twig' %}
+            </div>
+        </div>
+    </div>
+</header>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-6 my-2">
+                <img src="{{ article.picture }}" alt="{{article.title}}" class="img-show">
+            </div>
+            <div class="col-6 my-2">
+                <h3>{{ article.title }}</h3>
+            </div>
+            <div class="col-12 my-2">
+                <p>{{ article.content }}</p>
+            </div>
+            
+            <div class="col-12 my-2">
+                <p>commentaires</p>
+            </div>
+            
+            
+            <div class="col-12 my-2">
+            <a href="{{ path('app_article_index') }}" class="btn btn-dark rounded-pill">Retour</a>
+
+            <a href="{{ path('app_article_edit', {'id': article.id}) }}" class="btn btn-success rounded-pill">Editer</a>
+
+            {{ include('article/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

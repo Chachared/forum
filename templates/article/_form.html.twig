@@ -1,0 +1,50 @@
+{{ form_start(form) }}
+
+<div class="container">
+    <div class="form-group">
+
+        <div class="my-2 me-3">
+        {{ form_label (form.title) }}
+        {{ form_widget (form.title) }}
+        <div class="form-error">
+            {{ form_errors (form.title) }}
+        </div>
+        </div>
+
+        <div class="my-2 me-3">
+        {{ form_label (form.content) }}
+        {{ form_widget (form.content) }}
+        <div class="form-error">
+            {{ form_errors (form.content) }}
+        </div>
+        </div>
+
+        <div class="my-2 me-3">
+        {{ form_label (form.picture) }}
+        {{ form_widget (form.picture) }}
+        <div class="form-error">
+            {{ form_errors (form.picture) }}
+        </div>
+        </div>
+
+        <div class="my-2 me-3">
+
+        {{ form_label (form.category) }}
+        {{ form_widget (form.category) }}
+        <div class="form-error">
+            {{ form_errors (form.category) }}
+        </div>
+        </div>
+
+        <div class="my-2 me-3">
+        {{ form_label (form.user) }}
+        {{ form_widget (form.user) }}
+        <div class="form-error">
+            {{ form_errors (form.user) }}
+        </div>
+        </div>
+
+    </div>
+</div>
+
+{{ form_end(form) }}

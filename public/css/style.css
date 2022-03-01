@@ -1,0 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Hubballi&family=Syne+Mono&display=swap");
+
+h1,
+h2,
+h3 {
+  font-family: "Syne Mono";
+  color:#896b6b;
+}
+
+body {
+  font-family: "Hubballi";
+}
+
+header {
+  background: rgb(2, 6, 87);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 6, 87, 1) 0%,
+    rgba(9, 82, 163, 1) 56%,
+    rgba(69, 180, 252, 1) 100%
+  );
+}
+
+.img-index {
+  height: 100px;
+}
+
+.img-show {
+  height: 200px;
+}
