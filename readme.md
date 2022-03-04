@@ -1,5 +1,10 @@
 
-CONNEXION USER : user / user123@
-CONNEXION ADMIN : admin / admin123@
+APPLI d'entraînement à Symfony 6 :
+
+Forum d'articles
+
+
+  
+  
 
 
