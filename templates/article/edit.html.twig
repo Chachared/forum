@@ -3,26 +3,28 @@
 {% block title %}Edition de l'article{% endblock %}
 
 {% block body %}
-<header>
-    <div class="container-fluid">
-        <div class="row">
+    <main>
+
+        <div class="container">
+
             <div class="col-12 text-center mt-2">
                 <h1>Edition de l'article</h1>
+                <a href="{{ path('app_article_index') }}" class="btn btn-dark rounded-pill">Retour</a>
             </div>
-            <div class="col-12 d-flex justify-content-center mt-2 mb-3">
-                {% include 'parts/nav.html.twig' %}
+
+            <div class="col- my-2">
+                {{ include('article/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
             </div>
+
+            <div class="col-6 my-2">
+                
+            </div>
+
+            <div class="col-6 d-flex align-content-end">
+                {{ include('article/_delete_form.html.twig') }}
+            </div>
+            
         </div>
-    </div>
-</header>
-    <main>
-    <div class="container">
-
-    {{ include('article/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
-
-    <a href="{{ path('app_article_index') }}" class="btn btn-dark rounded-pill mt-2">Retour</a>
-
-    {{ include('article/_delete_form.html.twig') }}
-    </div>
+        
     </main>
 {% endblock %}

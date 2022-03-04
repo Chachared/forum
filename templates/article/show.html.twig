@@ -3,42 +3,54 @@
 {% block title %}Article{% endblock %}
 
 {% block body %}
-    <header>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 text-center mt-2">
-                <h1> {{article.title}}</h1>
-            </div>
-            <div class="col-12 d-flex justify-content-center mt-2 mb-3">
-                {% include 'parts/nav.html.twig' %}
-            </div>
-        </div>
-    </div>
-</header>
+
 
     <div class="container">
+
+        <div class="col-12 text-center mt-2">
+            <h1> {{article.title}}</h1>
+        </div>
         <div class="row">
             <div class="col-6 my-2">
-                <img src="{{ article.picture }}" alt="{{article.title}}" class="img-show">
+                <img src="{{ asset('uploads/articles/' ~ article.picture) }}" alt="{{article.title}}" class="img-show">
             </div>
             <div class="col-6 my-2">
-                <h3>{{ article.title }}</h3>
+                </br>
+                <h4>>><em>{{ article.category.designation}}</em></h4>
             </div>
             <div class="col-12 my-2">
                 <p>{{ article.content }}</p>
             </div>
-            
-            <div class="col-12 my-2">
-                <p>commentaires</p>
+
+            <div class="col-6 my-2">
+                <a href="{{ path('app_article_index') }}" class="btn btn-dark rounded-pill">Retour</a>
+
+                {% if app.user %}
+                    {% if app.user.hasRole('ROLE_ADMIN') %}
+                        <a href="{{ path('app_article_edit', {'id': article.id}) }}" class="btn btn-success rounded-pill">Editer</a>
+                    {% else %}
+                        <a href="{{ path('app_article_edit', {'id': article.id}) }}" class="btn btn-success rounded-pill disabled">Editer</a>
+                    {% endif %}
+                {% else %}
+                    <a></a>
+                {% endif %}
+
+                <a href="{{ path('app_comment_new', {'id': article.id}) }}" class="btn btn-primary rounded-pill">Ajouter un commentaire sur l'article</a>
             </div>
-            
-            
-            <div class="col-12 my-2">
-            <a href="{{ path('app_article_index') }}" class="btn btn-dark rounded-pill">Retour</a>
+            <div class="col-6 d-flex align-content-end">
+                {{ include('article/_delete_form.html.twig') }}
+            </div>
 
-            <a href="{{ path('app_article_edit', {'id': article.id}) }}" class="btn btn-success rounded-pill">Editer</a>
-
-            {{ include('article/_delete_form.html.twig') }}
+            <div class="row">
+            <div class="col-6 my-2">
+                {% for comments in article.comment %}
+                    <div class="card rounded-pill">
+                        <div class="card-body">
+                            <strong>Le {{comments.date|date("d/m/Y")}}</strong>, <em>{{comments.user.username}}</em> a commenté : "{{ comments.content }}"
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
             </div>
         </div>
     </div>

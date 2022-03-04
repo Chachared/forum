@@ -3,7 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CommentRepository;
-use DateTimeImmutable;
+use \DateTimeImmutable;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
@@ -14,8 +15,8 @@ class Comment
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'datetime_immutable')]
-    private ?\DateTimeImmutable $date;
+    #[ORM\Column(type: 'datetime_immutable', options: ['default' => 'CURRENT_TIMESTAMP'])]
+    private DateTimeImmutable $date;
 
     #[ORM\Column(type: 'text')]
     private $content;
@@ -35,6 +36,7 @@ class Comment
 
     //renseigner automatiquement la date du jour lors de l'ajout
     public function __construct(){
+        $this->comments = new ArrayCollection();
         $this->date = new \DateTimeImmutable();
     }
     
@@ -42,7 +44,7 @@ class Comment
         return $this->id;
     }
     
-    public function getDate(): ?\DateTimeImmutable
+    public function getDate(): \DateTimeImmutable
     {
         return $this->date;
     }

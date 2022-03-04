@@ -7,10 +7,12 @@ use App\Entity\Article;
 use App\Entity\Category;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class ArticleType extends AbstractType
 {
@@ -27,9 +29,27 @@ class ArticleType extends AbstractType
                 'label'=>"Saisir l'article",
                 'attr'=>['class'=>'form-control']
             ])
-            ->add('picture', TextType::class, [
+            ->add('picture', FileType::class, [
                 'required'=>false,
-                'label'=>"URL de l'image",
+                'mapped'=>false,
+                'label'=>"Image",
+                'constraints'=>[
+                    new File(
+                        [
+                            'maxSize'=>'2M',
+                            'maxSizeMessage'=>'Le fichier est trop volumineux',
+                            'mimeTypes'=>[
+                                'image/jpg',
+                                'image/jpeg',
+                                'image/png',
+                                'image/gif',
+                                'image/jfif'
+                            ],
+                            'mimeTypesMessage'=> 'veuillez télécharger au format jpg, png,jfif, gif ou jpeg'
+                            
+                        ]
+                    )
+                ],
                 'attr'=>['class'=>'form-control']
             ])
             ->add('category', EntityType::class, [

@@ -3,8 +3,11 @@
 {% block title %}User{% endblock %}
 
 {% block body %}
-    <h1>User</h1>
+<div class="col-12 text-center mt-2">
+    <h1> Vue du profil</h1>
+</div>
 
+<div class="container">
     <table class="table">
         <tbody>
             <tr>
@@ -31,16 +34,14 @@
                 <th>Roles</th>
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
             </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
-            </tr>
+
         </tbody>
     </table>
 
-    <a href="{{ path('app_user_index') }}">back to list</a>
+    <a href="{{ path('app_user_index') }}">Retour</a>
 
-    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+    <a href="{{ path('app_user_edit', {'id': user.id}) }}">Editer</a>
 
     {{ include('user/_delete_form.html.twig') }}
+</div>
 {% endblock %}

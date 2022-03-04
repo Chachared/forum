@@ -4,7 +4,12 @@ h1,
 h2,
 h3 {
   font-family: "Syne Mono";
-  color:#896b6b;
+  color: #896b6b;
+}
+
+h4 {
+  font-family: "Syne Mono";
+  color: #38649e;
 }
 
 body {

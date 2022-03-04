@@ -3,20 +3,16 @@
 {% block title %}Les commentaires{% endblock %}
 
 {% block body %}
-<header>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 text-center mt-2">
-                <h1>Les commentaires</h1>
-            </div>
-            <div class="col-12 d-flex justify-content-center mt-2 mb-3">
-                {% include 'parts/nav.html.twig' %}
-            </div>
-        </div>
-    </div>
-</header>
-    <main>
+
+<main>
     <div class="container">
+
+    <div class="col-12 text-center mt-2">
+            <h1>Les commentaires</h1>
+        </div>
+        <div class="col-12 text-center mt-4">
+            <a href="{{ path('app_comment_new') }}">Ajouter un commentaire</a>
+        </div>
 
     <table class="table">
         <thead>
@@ -35,7 +31,7 @@
                 <td>{{ comment.content }}</td>
                 <td>
                     <a href="{{ path('app_comment_show', {'id': comment.id}) }}">voir</a>
-                    <a href="{{ path('app_comment_edit', {'id': comment.id}) }}">éditer</a>
+                    <a href="{{ path('app_comment_delete', {'id': comment.id}) }}">supprimer</a>
                 </td>
             </tr>
         {% else %}
@@ -46,5 +42,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_comment_new') }}">Ajouter un commentaire</a>
+</main>
 {% endblock %}

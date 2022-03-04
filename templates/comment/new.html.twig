@@ -3,22 +3,17 @@
 {% block title %}Création d'un commentaire{% endblock %}
 
 {% block body %}
-<header>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 text-center mt-2">
-                <h1>Création d'un commentaire</h1>
-            </div>
-            <div class="col-12 d-flex justify-content-center mt-2 mb-3">
-                {% include 'parts/nav.html.twig' %}
-            </div>
-        </div>
-    </div>
-</header>
-    <main>
+<div class="col-12 text-center mt-2">
+    <h1>Créer un commentaire</h1>
+</div>
+
+<main>
     <div class="container">
 
-    {{ include('comment/_form.html.twig') }}
+        {{ include('comment/_form.html.twig') }}
 
-    <a href="{{ path('app_comment_index') }}" class="btn btn-dark rounded-pill">Retour</a>
+        <a href="{{ path('app_comment_index') }}" class="btn btn-dark rounded-pill">Retour</a>
+    </div>
+    
+</main>
 {% endblock %}

@@ -16,6 +16,18 @@
             <script src="{{ asset('bootstrap5/js/bootstrap.bundle.js') }}" rel="script"></script>
         {% endblock %}
     </head>
+    <header>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 text-center mt-2">
+                <h1>Le forum trop bien de l'éval</h1>
+            </div>
+            <div class="col-12 d-flex justify-content-center mt-2 mb-3">
+                {% include 'parts/nav.html.twig' %}
+            </div>
+        </div>
+    </div>
+</header>
     <body>
         {% block body %}{% endblock %}
     </body>

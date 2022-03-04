@@ -16,8 +16,8 @@ class Article
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 100)]
-    #[Assert\Length(min:10, max:100)]
+    #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\Length(min:10, max:255)]
     private $title;
 
     #[ORM\Column(type: 'text')]
@@ -80,7 +80,7 @@ class Article
         return $this->picture;
     }
 
-    public function setPicture(?string $picture): self
+    public function setPicture(string $picture): self
     {
         $this->picture = $picture;
 

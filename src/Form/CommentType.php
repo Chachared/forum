@@ -3,7 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Comment;
+
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -20,9 +22,8 @@ class CommentType extends AbstractType
                 'attr'=>['class'=>'form-control']
             ])
             
-            //get User
-            //get Article
-            //get Date
+            ->add('user')
+            ->add('article')
             ->add('submit', SubmitType::class, [
                 'label'=>"Ajouter",
                 'attr'=>['class'=>'btn btn-success rounded-pill my-2']

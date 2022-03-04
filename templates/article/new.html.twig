@@ -3,24 +3,18 @@
 {% block title %}Création d'un article{% endblock %}
 
 {% block body %}
-<header>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 text-center mt-2">
-                <h1>Création d'un article</h1>
-            </div>
-            <div class="col-12 d-flex justify-content-center mt-2 mb-3">
-                {% include 'parts/nav.html.twig' %}
-            </div>
-        </div>
-    </div>
-</header>
-    <main>
+
+<main>
+
     <div class="container">
+        <div class="col-12 text-center mt-2">
+            <h1>Création d'un article</h1>
+            <a href="{{ path('app_article_index') }}" class="btn btn-dark rounded-pill mt-2">Retour</a>
+        </div>
 
         {{ include('article/_form.html.twig') }}
 
-        <a href="{{ path('app_article_index') }}" class="btn btn-dark rounded-pill mt-5">Retour</a>
     </div>
-    </main>
+
+</main>
 {% endblock %}

@@ -3,35 +3,27 @@
 {% block title %}S'enregistrer{% endblock %}
 
 {% block body %}
-    <header>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 text-center mt-2">
-                <h1> S'enregistrer</h1>
-            </div>
-            <div class="col-12 d-flex justify-content-center mt-2 mb-3">
-                <a class="btn btn-primary rounded-pill me-2"  href="{{ path('app_home') }}">Accueil</a>
-            </div>
-        </div>
-    </div>
-</header>
 
 <main>
+
     <div class="container">
+
+        <div class="col-12 text-center mt-2">
+            <h1> S'enregistrer</h1>
+        </div>
+ 
         
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.firstname) }}
-        {{ form_row(registrationForm.lastname) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.username) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Mot de passe'
-        }) }}
+        {{ form_start(registrationForm) }}
+            {{ form_row(registrationForm.firstname) }}
+            {{ form_row(registrationForm.lastname) }}
+            {{ form_row(registrationForm.email) }}
+            {{ form_row(registrationForm.username) }}
+            {{ form_row(registrationForm.plainPassword, {
+                label: 'Mot de passe'
+            }) }}
 
-
-
-        <button type="submit" class="btn btn-success rounded-pill mt-2">S'enregistrer</button>
-    {{ form_end(registrationForm) }}
+            <button type="submit" class="btn btn-success rounded-pill mt-2">S'enregistrer</button>
+        {{ form_end(registrationForm) }}
     </div>
 </main>
 {% endblock %}

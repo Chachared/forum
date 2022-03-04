@@ -4,12 +4,14 @@
 
         <div class="my-2 me-3">
         {{ form_label (form.content) }}
-        <div>{{ form_widget (form.content) }}</div>
-        <div class="form-error">
-            {{ form_errors (form.content) }}
+            <div>
+                {{ form_widget (form.content) }}
+            </div>
+            <div class="form-error">
+                {{ form_errors (form.content) }}
+            </div>
         </div>
-        </div>
-
+        
     </div>
 
 {{ form_end(form) }}

@@ -15,5 +15,4 @@ Les ratages (ou pas réussi à aménager le temps):
 - le register n'est pas fini (il y a le formulaire mais il n'enregistre rien)
 - l'accès par rôle est incomplet : je n'ai pas pu me pencher sur le CRUD des articles postés par un utilisateur, ni sur l'ajout de commentaire
 - mes CRUD ne sont pas liés les uns au autres (ajouter un commentaire sur un article, ajouter un article dans une catégorie)
-- mes boutons login et register sur la homepage n'ont pas de route (il faut taper directement /login dans la barre de recherche = https://localhost:8000/login )
 - je n'ai pas pu faire d'upload d'image

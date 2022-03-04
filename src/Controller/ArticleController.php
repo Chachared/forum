@@ -7,10 +7,11 @@ use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[Route('/article')]
 class ArticleController extends AbstractController
@@ -26,13 +27,31 @@ class ArticleController extends AbstractController
 
     
     #[Route('/new', name: 'app_article_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, ArticleRepository $articleRepository): Response
+    public function new(Request $request, ArticleRepository $articleRepository, SluggerInterface $slugger): Response
     {
         $article = new Article();
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
+            $picture = $form->get('picture')->getData();
+
+            if ($picture) {
+                $originalFilename = pathinfo($picture->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$picture->guessExtension();
+
+                try {
+                    $picture->move(
+                        $this->getParameter('pictures_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                }
+
+                $article->setPicture($newFilename);
+            }
             $articleRepository->add($article);
             return $this->redirectToRoute('app_article_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -52,12 +71,32 @@ class ArticleController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_article_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Article $article, ArticleRepository $articleRepository): Response
+    public function edit(Request $request, Article $article, ArticleRepository $articleRepository, SluggerInterface $slugger): Response
     {
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $picture = $form->get('picture')->getData();
+            if ($picture) {
+                $originalFilename = pathinfo($picture->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$picture->guessExtension();
+
+                try {
+                    $picture->move(
+                        $this->getParameter('pictures_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+
+                }
+
+                $article->setPicture($newFilename);
+
+            }
+
+
             $articleRepository->add($article);
             return $this->redirectToRoute('app_article_index', [], Response::HTTP_SEE_OTHER);
         }
