@@ -13,10 +13,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
+
 #[Route('/article')]
 class ArticleController extends AbstractController
 {
-    #[IsGranted('ROLE_USER')]
+    
     #[Route('/', name: 'app_article_index', methods: ['GET'])]
     public function index(ArticleRepository $articleRepository): Response
     {
@@ -25,13 +26,14 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    
+    #[IsGranted('ROLE_USER')]
     #[Route('/new', name: 'app_article_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ArticleRepository $articleRepository, SluggerInterface $slugger): Response
     {
         $article = new Article();
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
+        $article->setUser($this->getUser());
 
         if ($form->isSubmitted() && $form->isValid()) {
             
@@ -69,12 +71,14 @@ class ArticleController extends AbstractController
             'article' => $article,
         ]);
     }
-
+    
+    #[IsGranted('ROLE_USER')]
     #[Route('/{id}/edit', name: 'app_article_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Article $article, ArticleRepository $articleRepository, SluggerInterface $slugger): Response
     {
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
+        $article->setUser($this->getUser());
 
         if ($form->isSubmitted() && $form->isValid()) {
             $picture = $form->get('picture')->getData();
@@ -106,7 +110,8 @@ class ArticleController extends AbstractController
             'form' => $form,
         ]);
     }
-
+    
+    #[IsGranted('ROLE_USER')]
     #[Route('/{id}', name: 'app_article_delete', methods: ['POST'])]
     public function delete(Request $request, Article $article, ArticleRepository $articleRepository): Response
     {

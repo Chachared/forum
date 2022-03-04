@@ -26,6 +26,8 @@
         </thead>
         <tbody>
         {% for article in articles %}
+            {% if app.user %}
+                {% if app.user.hasRole('ROLE_ADMIN') %}
             <tr>
                 <td>{{ article.id }}</td>
                 <td>{{ article.title }}</td>
@@ -36,6 +38,19 @@
                     <a href="{{ path('app_article_edit', {'id': article.id}) }}" class="btn btn-success rounded-pill my-1">éditer</a>
                 </td>
             </tr>
+                {% elseif app.user.id == article.user.id %}
+                    <tr>
+                        <td>{{ article.id }}</td>
+                        <td>{{ article.title }}</td>
+                        <td>{{ article.content }}</td>
+                        <td><img src="{{ asset('uploads/articles/' ~ article.picture) }}" alt="{{article.title}}" class="img-index"></td>
+                    <td>
+                        <a href="{{ path('app_article_show', {'id': article.id}) }}" class="btn btn-primary rounded-pill my-1">voir</a>
+                        <a href="{{ path('app_article_edit', {'id': article.id}) }}" class="btn btn-success rounded-pill my-1">éditer</a>
+                    </td>
+                </tr>
+            {% endif %}
+        {% endif %}
         {% else %}
             <tr>
                 <td colspan="5">Nous n'avons trouvé aucun article</td>

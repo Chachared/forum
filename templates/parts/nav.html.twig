@@ -2,24 +2,34 @@
                     <li class="nav-item">
                         <a class="btn btn-primary rounded-pill me-2"  href="{{ path('app_home') }}">Accueil</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="btn btn-primary rounded-pill me-2" href="{{ path('app_article_index') }}">Gérer mes articles</a>
-                    </li>
+    
 
                     {% if app.user %}
                         {% if app.user.hasRole('ROLE_ADMIN') %} 
                             <li class="nav-item ">
                                 <a class="btn btn-primary rounded-pill me-2" href="{{ path('app_category_index') }}">Gérer les catégories</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="btn btn-primary rounded-pill me-2" href="{{ path('app_article_index') }}">Gérer les articles</a>
+                            </li>
+
                         {% else %}
                             <li class="nav-item ">
                                 <a class="btn btn-secondary disabled rounded-pill me-2" href="{{ path('app_category_index') }}">Gérer les catégories</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="btn btn-primary rounded-pill me-2" href="{{ path('app_article_index') }}">Gérer mes articles</a>
+                            </li>
+
                         {% endif %}
                     {% else %}
                         <li class="nav-item ">
-                                <a class="btn btn-secondary disabled rounded-pill me-2" href="{{ path('app_category_index') }}">Gérer les catégories</a>
-                            </li>
+                            <a class="btn btn-secondary disabled rounded-pill me-2" href="{{ path('app_category_index') }}">Gérer les catégories</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-secondary disabled rounded-pill me-2" href="{{ path('app_article_index') }}">Gérer mes articles</a>
+                        </li>
+
                     {% endif %}
                     
                     

@@ -23,31 +23,52 @@
             </div>
 
             <div class="col-6 my-2">
-                <a href="{{ path('app_article_index') }}" class="btn btn-dark rounded-pill">Retour</a>
 
                 {% if app.user %}
                     {% if app.user.hasRole('ROLE_ADMIN') %}
                         <a href="{{ path('app_article_edit', {'id': article.id}) }}" class="btn btn-success rounded-pill">Editer</a>
-                    {% else %}
-                        <a href="{{ path('app_article_edit', {'id': article.id}) }}" class="btn btn-success rounded-pill disabled">Editer</a>
+                    {% elseif app.user.id == article.user.id %}
+                        <a href="{{ path('app_article_edit', {'id': article.id}) }}" class="btn btn-success rounded-pill">Editer</a>
+                    {% endif %}
+                    <a href="{{ path('app_comment_new', {'article': article}) }}" class="btn btn-primary rounded-pill">Ajouter un commentaire sur l'article</a>
+                    <a href="{{ path('app_article_index') }}" class="btn btn-dark rounded-pill">Retour</a>
+                {% else %}
+                    <a></a>
+                    <a href="{{ path('app_home') }}" class="btn btn-dark rounded-pill">Retour</a>
+                {% endif %}
+
+            </div>
+            <div class="col-6 d-flex align-content-end">
+                {% if app.user %}
+                    {% if app.user.hasRole('ROLE_ADMIN') %}
+                        {{ include('article/_delete_form.html.twig') }}
+                    {% elseif app.user.id == article.user.id %}
+                        {{ include('article/_delete_form.html.twig') }}
                     {% endif %}
                 {% else %}
                     <a></a>
                 {% endif %}
-
-                <a href="{{ path('app_comment_new', {'id': article.id}) }}" class="btn btn-primary rounded-pill">Ajouter un commentaire sur l'article</a>
-            </div>
-            <div class="col-6 d-flex align-content-end">
-                {{ include('article/_delete_form.html.twig') }}
             </div>
 
             <div class="row">
             <div class="col-6 my-2">
                 {% for comments in article.comment %}
-                    <div class="card rounded-pill">
+                    <div class="card rounded-pill mx-2 my-2">
                         <div class="card-body">
                             <strong>Le {{comments.date|date("d/m/Y")}}</strong>, <em>{{comments.user.username}}</em> a commenté : "{{ comments.content }}"
+                                {% if app.user %}
+
+                                    {% if app.user.id == comments.user.id %}
+                                        <a href="{{ path('app_comment_edit', {'id': comments.id}) }}">modifier</a>
+                                    {% elseif app.user.hasRole('ROLE_ADMIN') %}
+                                        <a href="{{ path('app_comment_edit', {'id': comments.id}) }}">modifier</a>
+                                    {% endif %}
+                                {% else %}
+                                    <a></a>
+                                {% endif %}
                         </div>
+                        
+
                     </div>
                 {% endfor %}
             </div>

@@ -3,17 +3,17 @@
 {% block title %}Création d'une catégorie{% endblock %}
 
 {% block body %}
-<div class="col-12 text-center mt-2">
-    <h1>Création d'une catégorie</h1>
-</div>
-
 <main>
 
     <div class="container">
 
-        {{ include('category/_form.html.twig') }}
+        <div class="col-12 text-center mt-2">
+            <h1>Création d'une catégorie</h1>
+            <a href="{{ path('app_category_index') }}" class="btn btn-dark rounded-pill mt-2">Retour</a>
+        </div>
 
-        <a href="{{ path('app_category_index') }}" class="btn btn-dark rounded-pill mt-5">Retour</a>
+        {{ include('category/_form.html.twig') }}
+ 
     </div>
     
 </main>

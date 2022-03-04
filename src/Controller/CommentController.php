@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
 use App\Entity\Comment;
 use App\Form\CommentType;
 use App\Repository\CommentRepository;
@@ -23,16 +24,19 @@ class CommentController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_comment_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, CommentRepository $commentRepository): Response
-    {
+    #[Route('/new/{article}', name: 'app_comment_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, CommentRepository $commentRepository, Article $article): Response
+    {   
+        
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $commentRepository->add($comment);
-            return $this->redirectToRoute('app_comment_index', [], Response::HTTP_SEE_OTHER);
+        $comment->setUser($this->getUser());
+        $comment->setArticle($article);
+        
+        if ($form->isSubmitted() && $form->isValid()) { 
+            $commentRepository->add($comment);       
+            return $this->redirectToRoute('app_article_show',['id' => $comment->getArticle()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('comment/new.html.twig', [
@@ -49,15 +53,16 @@ class CommentController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_comment_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit/', name: 'app_comment_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Comment $comment, CommentRepository $commentRepository): Response
     {
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
+
         if ($form->isSubmitted() && $form->isValid()) {
             $commentRepository->add($comment);
-            return $this->redirectToRoute('app_comment_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_article_show',['id' => $comment->getArticle()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('comment/edit.html.twig', [

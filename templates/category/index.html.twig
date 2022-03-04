@@ -5,36 +5,39 @@
 {% block body %}
 <main>
     <div class="container">
+        <div class="col-12 text-center mt-2">
+            <h1>Les catégories</h1>
+        </div>
+        <div class="col-12 text-center mt-4">
+            <a href="{{ path('app_category_new') }}" class="btn btn-success rounded-pill my-2">Créer une catégorie</a>
+        </div>
 
-        
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Désignation</th>
+                        <th>actions</th>
+                    </tr>
+                </thead>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Désignation</th>
-                <th>actions</th>
-            </tr>
-        </thead>
+                <tbody>
+                    {% for category in categories %}
+                        <tr>
+                            <td>{{ category.id }}</td>
+                            <td>{{ category.designation }}</td>
+                            <td>
+                                <a href="{{ path('app_category_edit', {'id': category.id}) }}" class="btn btn-success rounded-pill my-1">éditer</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="3">Nous n'avons trouvé aucune catégorie</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
 
-        <tbody>
-        {% for category in categories %}
-            <tr>
-                <td>{{ category.id }}</td>
-                <td>{{ category.designation }}</td>
-                <td>
-
-                    <a href="{{ path('app_category_edit', {'id': category.id}) }}" class="btn btn-success rounded-pill my-1">éditer</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">Nous n'avons trouvé aucune catégorie</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-
-    </table>
+            </table>
 
     </div>
 

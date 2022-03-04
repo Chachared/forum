@@ -1,21 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Comment{% endblock %}
+{% block title %}Editer le commentaire{% endblock %}
 
 {% block body %}
-<div class="col-12 text-center mt-2">
-    <h1>Edition du commentaire</h1>
-</div>
-
 <main>
 
     <div class="container">
 
-        {{ include('comment/_form.html.twig', {'button_label': 'Update'}) }}
+        <div class="col-12 text-center mt-2">
+            <h1>Edition du commentaire</h1>
+            <a href="{{ path('app_article_show',{'id':comment.article.id}) }}" class="btn btn-dark rounded-pill">Retour</a>
+        </div>
 
-        <a href="{{ path('app_comment_index') }}">Retour à la liste</a>
+        {% if app.user.id == comment.user.id %}
+            <div class="col-6 my-2 mt-2">
+                {{ include('comment/_form.html.twig', {'button_label': 'Update'}) }}        
+            </div>
+        {% else %}
+            <div class="col-12 my-2 mt-2 alert alert-danger rounded-pill text-center" role="alert">
+                Vous ne pouvez pas modifier le commentaire d'un autre utilisateur, même si vous êtes administrateur. Vous pouvez toutefois supprimer le commentaire s'il vous paraît inapproprié !
+            </div>
+        {% endif %}
 
-        {{ include('comment/_delete_form.html.twig') }}
+        <div class="col-12 d-flex justify-content-center">
+            {{ include('comment/_delete_form.html.twig') }}
+        </div>
 
     </div>
 

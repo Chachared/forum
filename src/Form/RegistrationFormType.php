@@ -34,7 +34,6 @@ class RegistrationFormType extends AbstractType
             ])
 
             ->add('plainPassword', RepeatedType::class, [
-                'mapped'=> false,
                 'type' => PasswordType::class,
                 'invalid_message' => 'Veuillez vérifier vos mots de passe.',
                 'options' => ['attr' => ['class' => 'password-field form-control']],

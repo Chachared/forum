@@ -10,14 +10,11 @@
     <div class="col-12 text-center mt-2">
             <h1>Les commentaires</h1>
         </div>
-        <div class="col-12 text-center mt-4">
-            <a href="{{ path('app_comment_new') }}">Ajouter un commentaire</a>
-        </div>
-
+        
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>Article</th>
                 <th>Date</th>
                 <th>Contenu</th>
                 <th>actions</th>
@@ -25,15 +22,27 @@
         </thead>
         <tbody>
         {% for comment in comments %}
+            {% if app.user %}
+                {% if app.user.hasRole('ROLE_ADMIN') %}
             <tr>
-                <td>{{ comment.id }}</td>
+                <td>{{ comment.article.title }}</td>
                 <td>{{ comment.date ? comment.date|date('d-m-Y') : '' }}</td>
                 <td>{{ comment.content }}</td>
                 <td>
-                    <a href="{{ path('app_comment_show', {'id': comment.id}) }}">voir</a>
-                    <a href="{{ path('app_comment_delete', {'id': comment.id}) }}">supprimer</a>
+                    <a href="{{ path('app_comment_edit', {'id': comment.id}) }}" class="btn btn-success rounded-pill my-1">éditer</a>
                 </td>
             </tr>
+                {% elseif app.user.id == comment.user.id %}
+                <tr>
+                <td>{{ comment.article.title }}</td>
+                <td>{{ comment.date ? comment.date|date('d-m-Y') : '' }}</td>
+                <td>{{ comment.content }}</td>
+                <td>
+                    <a href="{{ path('app_comment_edit', {'id': comment.id}) }}" class="btn btn-success rounded-pill my-1">éditer</a>
+                </td>
+            </tr>
+            {% endif %}
+            {% endif %}
         {% else %}
             <tr>
                 <td colspan="4">Pas de commentaire</td>

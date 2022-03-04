@@ -5,14 +5,17 @@
 {% block body %}
 <div class="col-12 text-center mt-2">
     <h1>Créer un commentaire</h1>
+    <a href="{{ path('app_home') }}" class="btn btn-dark rounded-pill">Retour</a>
 </div>
 
 <main>
     <div class="container">
-
-        {{ include('comment/_form.html.twig') }}
-
-        <a href="{{ path('app_comment_index') }}" class="btn btn-dark rounded-pill">Retour</a>
+        {% if app.user %}
+            {{ include('comment/_form.html.twig') }}
+        {% else %}
+            <h3>Veuillez vous connecter ou vous enregistrer pour laisser votre commentaire</h3>
+        {% endif  %}
+        
     </div>
     
 </main>

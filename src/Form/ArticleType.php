@@ -45,7 +45,7 @@ class ArticleType extends AbstractType
                                 'image/gif',
                                 'image/jfif'
                             ],
-                            'mimeTypesMessage'=> 'veuillez télécharger au format jpg, png,jfif, gif ou jpeg'
+                            'mimeTypesMessage'=> 'veuillez télécharger au format jpg, png, jfif, gif ou jpeg'
                             
                         ]
                     )
@@ -55,10 +55,6 @@ class ArticleType extends AbstractType
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label'=>'designation'
-            ])
-            ->add('user', EntityType::class, [
-                'class' => User::class,
-                'choice_label'=>'username'
             ])
             ->add('submit', SubmitType::class, [
                 'label'=>"Ajouter",

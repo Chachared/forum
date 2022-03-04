@@ -38,7 +38,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $plainPassword = null;
     
     #[ORM\Column(type: 'string')]
-    #[Assert\NotBlank()]
     private $password;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Article::class, orphanRemoval: true)]

@@ -37,7 +37,7 @@ class Comment
     //renseigner automatiquement la date du jour lors de l'ajout
     public function __construct(){
         $this->comments = new ArrayCollection();
-        $this->date = new \DateTimeImmutable();
+        $this->date = new \DateTimeImmutable();  
     }
     
     public function __toString(){

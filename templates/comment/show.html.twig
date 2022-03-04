@@ -3,12 +3,13 @@
 {% block title %}Comment{% endblock %}
 
 {% block body %}
-<div class="col-12 text-center mt-2">
-    <h1>Voir le commentaire</h1>
-</div>
+
 
 <main>
     <div class="container">
+    <div class="col-12 text-center mt-2">
+    <h1>Voir le commentaire</h1>
+</div>
 
     <table class="table">
         <tbody>
@@ -27,7 +28,7 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_comment_index') }}">Retour à la liste</a>
+    <a href="{{ path('app_article_show', {'id': article.id}) }}">Retour</a>
 
     <a href="{{ path('app_comment_edit', {'id': comment.id}) }}">Editer</a>
 
