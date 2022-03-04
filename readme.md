@@ -11,8 +11,5 @@ CONNEXION ADMIN : admin / admin123@
 
 
 Les ratages (ou pas réussi à aménager le temps):
-- l'affichage des articles et leur commentaire sur la page d'accueil
-- le register n'est pas fini (il y a le formulaire mais il n'enregistre rien)
-- l'accès par rôle est incomplet : je n'ai pas pu me pencher sur le CRUD des articles postés par un utilisateur, ni sur l'ajout de commentaire
+- l'accès par rôle est incomplet : je n'ai pas encore pu me pencher sur le CRUD des articles postés par un utilisateur, ni sur l'ajout de commentaire
 - mes CRUD ne sont pas liés les uns au autres (ajouter un commentaire sur un article, ajouter un article dans une catégorie)
-- je n'ai pas pu faire d'upload d'image
