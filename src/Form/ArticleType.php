@@ -61,7 +61,6 @@ class ArticleType extends AbstractType
                 'attr'=>['class'=>'btn btn-success rounded-pill my-2']
             ])
 
-            //get comments
         ;
     }
 
